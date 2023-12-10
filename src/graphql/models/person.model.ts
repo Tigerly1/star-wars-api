@@ -22,11 +22,11 @@ export class Person {
   @Field()
   hair_color: string;
 
-  @Field(() => Int)
-  height: number;
+  @Field()
+  height: string;
 
-  @Field(() => Int)
-  mass: number;
+  @Field()
+  mass: string;
 
   @Field()
   skin_color: string;

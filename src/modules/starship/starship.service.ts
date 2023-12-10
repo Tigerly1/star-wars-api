@@ -1,11 +1,19 @@
 import { Injectable } from '@nestjs/common';
 import axios from 'axios';
+import { DataFetchService } from 'src/common/services/data-fetch.service';
 import { StarShip } from 'src/graphql/models/starship.model';
 
 @Injectable()
 export class StarShipService {
-  async findAll(): Promise<StarShip[]> {
-    const response = await axios.get('https://swapi.dev/api/starships/');
+  constructor(private dataFetchService: DataFetchService) {}
+
+
+  async getAll(): Promise<StarShip[]> {
+    return this.dataFetchService.fetchAllData<StarShip>('https://swapi.dev/api/starships');
+  }
+
+  async getPage(page: number): Promise<StarShip[]> {
+    const response = await axios.get(`https://swapi.dev/api/starships/?page=${page}`);
     return response.data.results;
   }
 

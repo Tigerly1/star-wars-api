@@ -26,8 +26,8 @@ type Person {
   eye_color: String!
   gender: String!
   hair_color: String!
-  height: Int!
-  mass: Int!
+  height: String!
+  mass: String!
   skin_color: String!
   homeworld: String!
   films: [String!]!
@@ -96,15 +96,34 @@ type Vehicle {
   edited: String!
 }
 
+type Planet {
+  url: ID!
+  name: String!
+  diameter: String!
+  rotation_period: String!
+  orbital_period: String!
+  gravity: String!
+  population: String!
+  climate: String!
+  terrain: String!
+  surface_water: String!
+  residents: [String!]!
+  films: [String!]!
+  created: String!
+  edited: String!
+}
+
 type Query {
-  films: [Film!]!
+  films(page: Int): [Film!]!
   film(id: Int!): Film
-  people: [Person!]!
+  people(page: Int): [Person!]!
   person(id: Int!): Person
-  species: [Species!]!
+  species(page: Int): [Species!]!
   oneOfSpecies(id: Int!): Species
-  starships: [StarShip!]!
+  starships(page: Int): [StarShip!]!
   starship(id: Int!): StarShip
-  vehicles: [Vehicle!]!
+  vehicles(page: Int): [Vehicle!]!
   vehicle(id: Int!): Vehicle
+  planets(page: Int): [Planet!]!
+  planet(id: Int!): Planet
 }
