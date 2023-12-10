@@ -7,54 +7,54 @@ export class StarShip {
   @Field(() => ID)
   url: string;
 
-  @Field()
+  @Field({ nullable: true })
   name: string;
 
-  @Field()
+  @Field({ nullable: true })
   model: string;
 
-  @Field()
+  @Field({ nullable: true })
   starship_class: string;
 
-  @Field()
+  @Field({ nullable: true })
   manufacturer: string;
 
-  @Field()
+  @Field({ nullable: true })
   cost_in_credits: string;
 
-  @Field()
+  @Field({ nullable: true })
   length: string;
 
-  @Field()
+  @Field({ nullable: true })
   crew: string;
 
-  @Field()
+  @Field({ nullable: true })
   passengers: string;
 
-  @Field()
+  @Field({ nullable: true })
   max_atmosphering_speed: string;
 
-  @Field()
+  @Field({ nullable: true })
   hyperdrive_rating: string;
 
-  @Field()
+  @Field({ nullable: true })
   MGLT: string;
 
-  @Field()
+  @Field({ nullable: true })
   cargo_capacity: string;
 
-  @Field()
+  @Field({ nullable: true })
   consumables: string;
 
-  @Field(() => [String])
+  @Field(() => [String],{ nullable: true })
   films: string[];
 
-  @Field(() => [String])
+  @Field(() => [String],{ nullable: true })
   pilots: string[];
 
-  @Field()
+  @Field({ nullable: true })
   created: string;
 
-  @Field()
+  @Field({ nullable: true })
   edited: string;
 }

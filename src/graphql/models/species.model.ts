@@ -8,45 +8,45 @@ export class Species {
   @Field(() => ID)
   url: string;
 
-  @Field()
+  @Field({ nullable: true })
   name: string;
 
-  @Field()
+  @Field({ nullable: true })
   classification: string;
 
-  @Field()
+  @Field({ nullable: true })
   designation: string;
 
-  @Field()
+  @Field({ nullable: true })
   average_height: string;
 
-  @Field()
+  @Field({ nullable: true })
   average_lifespan: string;
 
-  @Field()
+  @Field({ nullable: true })
   eye_colors: string;
 
-  @Field()
+  @Field({ nullable: true })
   hair_colors: string;
 
-  @Field()
+  @Field({ nullable: true })
   skin_colors: string;
 
-  @Field()
+  @Field({ nullable: true })
   language: string;
 
   @Field({ nullable: true })
   homeworld: string;
 
-  @Field(() => [String])
+  @Field(() => [String],{ nullable: true })
   people: string[];
 
-  @Field(() => [String])
+  @Field(() => [String],{ nullable: true })
   films: string[];
 
-  @Field()
+  @Field({ nullable: true })
   created: string;
 
-  @Field()
+  @Field({ nullable: true })
   edited: string;
 }

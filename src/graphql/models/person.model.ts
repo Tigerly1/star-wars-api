@@ -7,48 +7,48 @@ export class Person {
   @Field(() => ID)
   url: string;
 
-  @Field()
+  @Field({ nullable: true })
   name: string;
 
-  @Field()
+  @Field({ nullable: true })
   birth_year: string;
 
-  @Field()
+  @Field({ nullable: true })
   eye_color: string;
 
-  @Field()
+  @Field({ nullable: true })
   gender: string;
 
-  @Field()
+  @Field({ nullable: true })
   hair_color: string;
 
-  @Field()
+  @Field({ nullable: true })
   height: string;
 
-  @Field()
+  @Field({ nullable: true })
   mass: string;
 
-  @Field()
+  @Field({ nullable: true })
   skin_color: string;
 
-  @Field()
+  @Field({ nullable: true })
   homeworld: string;
 
-  @Field(() => [String])
+  @Field(() => [String],{ nullable: true })
   films: string[];
 
-  @Field(() => [String])
+  @Field(() => [String],{ nullable: true })
   species: string[];
 
-  @Field(() => [String])
+  @Field(() => [String],{ nullable: true })
   starships: string[];
 
-  @Field(() => [String])
+  @Field(() => [String],{ nullable: true })
   vehicles: string[];
 
-  @Field()
+  @Field({ nullable: true })
   created: string;
 
-  @Field()
+  @Field({ nullable: true })
   edited: string;
 }
