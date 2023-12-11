@@ -2,23 +2,37 @@ import { Injectable } from '@nestjs/common';
 import axios from 'axios';
 import { DataFetchService } from 'src/common/services/data-fetch.service';
 import { StarShip } from 'src/graphql/models/starship.model';
+import { GenericSwapiService, ISwapiService } from '../generic-swapi.service';
+import { CacheService } from 'src/common/services/cache.service';
 
 @Injectable()
 export class StarShipService {
-  constructor(private dataFetchService: DataFetchService) {}
+  private readonly swapiService: ISwapiService<StarShip>;
 
+  protected baseUrl = 'https://swapi.dev/api/starships';
+  protected cacheKey = 'starships';
 
-  async getAll(): Promise<StarShip[]> {
-    return this.dataFetchService.fetchAllData<StarShip>('https://swapi.dev/api/starships');
+  constructor(
+    dataFetchService: DataFetchService,
+    cacheService: CacheService,
+  ) {
+    this.swapiService = new GenericSwapiService<StarShip>(
+      this.baseUrl, 
+      this.cacheKey, 
+      dataFetchService, 
+      cacheService
+    );
   }
 
-  async getPage(page: number): Promise<StarShip[]> {
-    const response = await axios.get(`https://swapi.dev/api/starships/?page=${page}`);
-    return response.data.results;
+  getAll(): Promise<StarShip[]> {
+    return this.swapiService.getAll();
   }
 
-  async findOne(id: number): Promise<StarShip> {
-    const response = await axios.get(`https://swapi.dev/api/starships/${id}/`);
-    return response.data;
+  getPage(page: number): Promise<StarShip[]> {
+    return this.swapiService.getPage(page);
+  }
+
+  findOne(id: number): Promise<StarShip> {
+    return this.swapiService.findOne(id);
   }
 }

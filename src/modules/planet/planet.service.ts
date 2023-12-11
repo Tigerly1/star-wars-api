@@ -4,22 +4,37 @@ import { Injectable } from '@nestjs/common';
 import { DataFetchService } from '../../common/services/data-fetch.service';
 import { Planet } from '../../graphql/models/planet.model';
 import axios from 'axios';
+import { GenericSwapiService, ISwapiService } from '../generic-swapi.service';
+import { CacheService } from 'src/common/services/cache.service';
 
 @Injectable()
 export class PlanetService {
-  constructor(private dataFetchService: DataFetchService) {}
+  private readonly swapiService: ISwapiService<Planet>;
 
-  async getAll(): Promise<Planet[]> {
-    return this.dataFetchService.fetchAllData<Planet>('https://swapi.dev/api/planets');
+  protected baseUrl = 'https://swapi.dev/api/planets';
+  protected cacheKey = 'planets';
+
+  constructor(
+    dataFetchService: DataFetchService,
+    cacheService: CacheService,
+  ) {
+    this.swapiService = new GenericSwapiService<Planet>(
+      this.baseUrl, 
+      this.cacheKey, 
+      dataFetchService, 
+      cacheService
+    );
   }
 
-  async getPage(page: number): Promise<Planet[]> {
-    const response = await axios.get(`https://swapi.dev/api/planets/?page=${page}`);
-    return response.data.results;
+  getAll(): Promise<Planet[]> {
+    return this.swapiService.getAll();
   }
 
-  async findOne(id: number): Promise<Planet> {
-    const response = await axios.get(`https://swapi.dev/api/planets/${id}/`);
-    return response.data;
+  getPage(page: number): Promise<Planet[]> {
+    return this.swapiService.getPage(page);
+  }
+
+  findOne(id: number): Promise<Planet> {
+    return this.swapiService.findOne(id);
   }
 }

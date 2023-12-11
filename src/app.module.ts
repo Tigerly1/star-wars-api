@@ -9,12 +9,14 @@ import { StarShipModule } from './modules/starship/starship.module';
 import { VehicleModule } from './modules/vehicle/vehicle.module';
 import { PlanetModule } from './modules/planet/planet.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { CachedItem } from './psqlCache/cachedItem';
-import { CachedList } from './psqlCache/cachedList';
+import { CachedItem } from './psql/entities/cachedItem';
+import { CachedList } from './psql/entities/cachedList';
+import { ConfigModule } from '@nestjs/config';
 
 
 @Module({
   imports: [
+    ConfigModule.forRoot(),
     TypeOrmModule.forRoot({
       type: 'postgres', // specify the DB type
       host: process.env.DB_HOST || 'localhost', // Database host

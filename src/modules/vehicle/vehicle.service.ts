@@ -1,24 +1,38 @@
 import { Injectable } from '@nestjs/common';
-import axios from 'axios';
-import { DataFetchService } from 'src/common/services/data-fetch.service';
-import { Vehicle } from 'src/graphql/models/vehicle.model';
+import { Vehicle } from '../../graphql/models/vehicle.model';
+import { DataFetchService } from '../../common/services/data-fetch.service';
+import { CacheService } from '../../common/services/cache.service';
+import { GenericSwapiService, ISwapiService } from '../generic-swapi.service';
 
 @Injectable()
-export class VehicleService {
-  constructor(private dataFetchService: DataFetchService) {}
+export class VehicleService  {
 
-  async getAll(): Promise<Vehicle[]> {
-    return this.dataFetchService.fetchAllData<Vehicle>('https://swapi.dev/api/vehicles');
+  private readonly swapiService: ISwapiService<Vehicle>;
 
+  protected baseUrl = 'https://swapi.dev/api/vehicles';
+  protected cacheKey = 'vehicles';
+
+  constructor(
+    dataFetchService: DataFetchService,
+    cacheService: CacheService,
+  ) {
+    this.swapiService = new GenericSwapiService<Vehicle>(
+      this.baseUrl, 
+      this.cacheKey, 
+      dataFetchService, 
+      cacheService
+    );
   }
 
-  async getPage(page: number): Promise<Vehicle[]> {
-    const response = await axios.get(`https://swapi.dev/api/vehicles/?page=${page}`);
-    return response.data.results;
+  getAll(): Promise<Vehicle[]> {
+    return this.swapiService.getAll();
   }
 
-  async findOne(id: number): Promise<Vehicle> {
-    const response = await axios.get(`https://swapi.dev/api/vehicles/${id}/`);
-    return response.data;
+  getPage(page: number): Promise<Vehicle[]> {
+    return this.swapiService.getPage(page);
+  }
+
+  findOne(id: number): Promise<Vehicle> {
+    return this.swapiService.findOne(id);
   }
 }

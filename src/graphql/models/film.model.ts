@@ -3,46 +3,46 @@
 import { Field, ObjectType, Int, ID } from '@nestjs/graphql';
 
 @ObjectType()
-export class Planet {
+export class Film {
   @Field(() => ID)
   url: string;
 
-  @Field({ nullable: true })
-  name: string;
-
-  @Field({ nullable: true })
-  rotation_period: string;
-
-  @Field({ nullable: true })
-  orbital_period: string;
-
-  @Field({ nullable: true })
-  diameter: string;
-
-  @Field({ nullable: true })
-  climate: string;
-
-  @Field({ nullable: true })
-  gravity: string;
-
-  @Field({ nullable: true })
-  terrain: string;
-
-  @Field({ nullable: true })
-  surface_water: string;
-
-  @Field({ nullable: true })
-  population: string;
-
   @Field(() => [String], { nullable: true })
-  residents: string[];
-
-  @Field(() => [String], { nullable: true })
-  films: string[];
+  characters: string[];
 
   @Field({ nullable: true })
   created: string;
 
   @Field({ nullable: true })
+  director: string;
+
+  @Field({ nullable: true })
   edited: string;
+
+  @Field(() => Int,{ nullable: true })
+  episode_id: number;
+
+  @Field({ nullable: true })
+  opening_crawl: string;
+
+  @Field(() => [String],{ nullable: true })
+  planets: string[];
+
+  @Field({ nullable: true })
+  producer: string;
+
+  @Field({ nullable: true })
+  release_date: string;
+
+  @Field(() => [String],{ nullable: true })
+  species: string[];
+
+  @Field(() => [String],{ nullable: true })
+  starships: string[];
+
+  @Field(() => [String],{ nullable: true })
+  vehicles: string[];
+
+  @Field({ nullable: true })
+  title: string;
 }

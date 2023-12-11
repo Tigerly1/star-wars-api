@@ -4,24 +4,38 @@ import { Injectable } from '@nestjs/common';
 import axios from 'axios';
 import { Film } from '../../graphql/models/film.model';
 import { DataFetchService } from '../../common/services/data-fetch.service';
+import { CacheService } from 'src/common/services/cache.service';
+import { GenericSwapiService, ISwapiService } from '../generic-swapi.service';
 
 
 @Injectable()
 export class FilmService {
-  constructor(private dataFetchService: DataFetchService) {}
+  private readonly swapiService: ISwapiService<Film>;
 
+  protected baseUrl = 'https://swapi.dev/api/films';
+  protected cacheKey = 'films';
 
-  async getAll(): Promise<Film[]> {
-    return this.dataFetchService.fetchAllData<Film>('https://swapi.dev/api/films');
+  constructor(
+    dataFetchService: DataFetchService,
+    cacheService: CacheService,
+  ) {
+    this.swapiService = new GenericSwapiService<Film>(
+      this.baseUrl, 
+      this.cacheKey, 
+      dataFetchService, 
+      cacheService
+    );
   }
 
-  async getPage(page: number): Promise<Film[]> {
-    const response = await axios.get(`https://swapi.dev/api/films/?page=${page}`);
-    return response.data.results;
+  getAll(): Promise<Film[]> {
+    return this.swapiService.getAll();
   }
 
-  async findOne(id: number): Promise<Film> {
-    const response = await axios.get(`https://swapi.dev/api/films/${id}/`);
-    return response.data;
+  getPage(page: number): Promise<Film[]> {
+    return this.swapiService.getPage(page);
+  }
+
+  findOne(id: number): Promise<Film> {
+    return this.swapiService.findOne(id);
   }
 }

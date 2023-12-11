@@ -1,18 +1,37 @@
 import { Injectable } from '@nestjs/common';
-import axios from 'axios';
 import { DataFetchService } from 'src/common/services/data-fetch.service';
 import { Person } from 'src/graphql/models/person.model';
+import { GenericSwapiService, ISwapiService } from '../generic-swapi.service';
+import { CacheService } from 'src/common/services/cache.service';
 
 @Injectable()
 export class PeopleService {
-  constructor(private dataFetchService: DataFetchService) {}
+  private readonly swapiService: ISwapiService<Person>;
 
-  async getAll(): Promise<Person[]> {
-    return this.dataFetchService.fetchAllData<Person>('https://swapi.dev/api/people');
+  protected baseUrl = 'https://swapi.dev/api/people';
+  protected cacheKey = 'people';
+
+  constructor(
+    dataFetchService: DataFetchService,
+    cacheService: CacheService,
+  ) {
+    this.swapiService = new GenericSwapiService<Person>(
+      this.baseUrl, 
+      this.cacheKey, 
+      dataFetchService, 
+      cacheService
+    );
   }
 
-  async findOne(id: number): Promise<Person> {
-    const response = await axios.get(`https://swapi.dev/api/people/${id}/`);
-    return response.data;
+  getAll(): Promise<Person[]> {
+    return this.swapiService.getAll();
+  }
+
+  getPage(page: number): Promise<Person[]> {
+    return this.swapiService.getPage(page);
+  }
+
+  findOne(id: number): Promise<Person> {
+    return this.swapiService.findOne(id);
   }
 }
