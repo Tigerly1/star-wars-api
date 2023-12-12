@@ -12,6 +12,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { CachedItem } from './psql/entities/cachedItem';
 import { CachedList } from './psql/entities/cachedList';
 import { ConfigModule } from '@nestjs/config';
+import { FilmAnalysisModule } from './modules/film/film-analysis.module';
 
 
 @Module({
@@ -33,6 +34,7 @@ import { ConfigModule } from '@nestjs/config';
     StarShipModule,
     VehicleModule,
     PlanetModule,
+    FilmAnalysisModule,
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),

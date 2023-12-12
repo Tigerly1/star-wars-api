@@ -126,4 +126,6 @@ type Query {
   vehicle(id: Int!): Vehicle
   planets(page: Int): [Planet!]!
   planet(id: Int!): Planet
+  uniqueWordsInFilmOpenings: [[String!]!]!
+  mostCommonCharacterNamesInOpenings: [String!]!
 }
