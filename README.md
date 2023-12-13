@@ -28,7 +28,7 @@ To run this project, you will need to add the following environment variables to
 
 ## Documentation
 
-Now you should be able to access the GraphQL Playground on 
+After dockerising locally you should be able to access the GraphQL Playground on 
 ```http://localhost:3000/graphql```
 
 Also there is standalone documentation in docs folder in index.html 
