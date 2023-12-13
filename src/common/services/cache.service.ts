@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { CachedItem } from 'src/psql/entities/cachedItem';
-import { CachedList } from 'src/psql/entities/cachedList';
+import { CachedItem } from '../../psql/entities/cachedItem';
+import { CachedList } from '../../psql/entities/cachedList';
 import { IsNull, Repository } from 'typeorm';
 import { Url, UrlObject } from 'url';
 

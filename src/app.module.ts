@@ -29,7 +29,6 @@ import { FilmAnalysisModule } from './modules/film/film-analysis.module';
       synchronize: (process.env.TYPEORM_SYNC)==="true" || false, // Should be false in production
     }),
     FilmModule,
-    PeopleModule,
     SpeciesModule,
     StarShipModule,
     VehicleModule,
@@ -38,10 +37,8 @@ import { FilmAnalysisModule } from './modules/film/film-analysis.module';
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
-      // other configurations...
+      playground: true,
     }),
-    // other modules...
   ],
-  // other configurations...
 })
 export class AppModule {}

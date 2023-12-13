@@ -1,0 +1,36 @@
+introspection:
+  url: http://localhost:3000/graphql
+info:
+  title: Star Wars API
+  description: >
+    The Star Wars API provides comprehensive information about the Star Wars universe, 
+    including films, characters, species, starships, and planets. This GraphQL API 
+    allows clients to query for detailed data about each entity in the Star Wars 
+    universe, offering flexibility and customization in data retrieval.
+queries:
+  /film:
+    summary: Retrieve a specific film by ID
+    description: >
+      The `film` query allows clients to retrieve detailed information about a specific 
+      film in the Star Wars universe by providing the film's ID. This includes data 
+      such as the film's title, director, release date, and associated characters and planets.
+  /films:
+    get:
+      summary: Retrieve a list of films
+      description: >
+        The `films` query returns a list of films from the Star Wars universe. 
+        Clients can paginate through the film list by providing a `page` argument.
+  /mostCommonCharacterNamesInOpenings:
+    get:
+      summary: Retrieve the most common character names in film openings
+      description: >
+        This query analyzes the opening crawls of all Star Wars films and returns 
+        a list of the most commonly mentioned character names.
+  /oneOfSpecies:
+    get:
+      summary: Retrieve a specific species by ID
+      description: >
+        The `oneOfSpecies` query provides detailed information about a specific 
+        species in the Star Wars universe, identified by its unique ID. This includes 
+        the species' classification, language, and homeworld.
+

@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import axios from 'axios';
 import { CacheService } from '../common/services/cache.service';
 import { DataFetchService } from '../common/services/data-fetch.service';
@@ -12,8 +12,8 @@ export interface ISwapiService<T> {
 @Injectable()
 export class GenericSwapiService<T> implements ISwapiService<T> {
   constructor(
-    private readonly baseUrl: string,
-    private readonly cacheKey: string,
+    @Inject('BASE_URL_TOKEN') private readonly baseUrl: string,
+    @Inject("CACHE_KEY_TOKEN") private readonly cacheKey: string,
     private readonly dataFetchService: DataFetchService,
     private readonly cacheService: CacheService,
   ) {}

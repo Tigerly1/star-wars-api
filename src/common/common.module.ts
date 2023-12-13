@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { DataFetchService } from './services/data-fetch.service';
 import { CacheService } from './services/cache.service';
-import { CachedItem } from 'src/psql/entities/cachedItem';
-import { CachedList } from 'src/psql/entities/cachedList';
+import { CachedItem } from '../psql/entities/cachedItem';
+import { CachedList } from '../psql/entities/cachedList';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({

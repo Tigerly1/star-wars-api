@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import axios from 'axios';
-import { Species } from 'src/graphql/models/species.model';
+import { Species } from '../../graphql/models/species.model';
 import { DataFetchService } from '../../common/services/data-fetch.service';
 import { GenericSwapiService, ISwapiService } from '../generic-swapi.service';
-import { CacheService } from 'src/common/services/cache.service';
+import { CacheService } from '../../common/services/cache.service';
 
 @Injectable()
 export class SpeciesService {

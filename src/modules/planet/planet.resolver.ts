@@ -1,13 +1,13 @@
 import { Args, Int, Query, Resolver } from '@nestjs/graphql';
-import { Planet } from 'src/graphql/models/planet.model';
+import { Planet } from '../../graphql/models/planet.model';
 import { PlanetService } from './planet.service';
-import { PaginationArgs } from 'src/graphql/dto/pagination.args';
+import { PaginationArgs } from '../../graphql/dto/pagination.args';
 
 @Resolver(() => Planet)
 export class PlanetResolver {
   constructor(private planetService: PlanetService) {}
 
-  @Query(() => [Planet])
+  @Query(() => [Planet], { description: 'Retrieve a list of all planets, with optional pagination.' })
   async planets(@Args() paginationArgs: PaginationArgs) { // Fix parameter type
     if (typeof paginationArgs.page === 'number') {
         return this.planetService.getPage(paginationArgs.page);
@@ -16,7 +16,7 @@ export class PlanetResolver {
     }
 }
 
-  @Query(() => Planet, { nullable: true })
+  @Query(() => Planet,  { description: 'Retrieve a single planet by unique ID.' })
   async planet(@Args('id', { type: () => Int }) id: number) {
     return this.planetService.findOne(id);
   }

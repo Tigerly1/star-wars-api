@@ -9,13 +9,15 @@ export class FilmAnalysisResolver {
   
   constructor(private filmAnalysisService: FilmAnalysisService) {}
 
-  @Query(() => [[String, Int]])
+  @Query(() => [[String, Int]], { 
+    description: 'Retrieve a list of all unique words in film openings, with their counts. Expect to be [[String, Int]]'
+   })
   async uniqueWordsInFilmOpenings() {
     const wordCounts = await this.filmAnalysisService.getUniqueWordsInOpenings();
     return Array.from(wordCounts.entries());
   }
 
-  @Query(() => [String])
+  @Query(() => [String], { description: 'Retrieve a list of the most common character names in film openings.' })
   async mostCommonCharacterNamesInOpenings() {
     return this.filmAnalysisService.getMostCommonNamesInOpenings();
   }

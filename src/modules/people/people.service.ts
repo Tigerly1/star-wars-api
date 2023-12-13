@@ -1,8 +1,8 @@
-import { Injectable } from '@nestjs/common';
-import { DataFetchService } from 'src/common/services/data-fetch.service';
-import { Person } from 'src/graphql/models/person.model';
+import { Inject, Injectable, forwardRef } from '@nestjs/common';
+import { DataFetchService } from '../../common/services/data-fetch.service';
+import { Person } from '../../graphql/models/person.model';
 import { GenericSwapiService, ISwapiService } from '../generic-swapi.service';
-import { CacheService } from 'src/common/services/cache.service';
+import { CacheService } from '../../common/services/cache.service';
 
 @Injectable()
 export class PeopleService {
@@ -16,10 +16,10 @@ export class PeopleService {
     cacheService: CacheService,
   ) {
     this.swapiService = new GenericSwapiService<Person>(
-      this.baseUrl, 
-      this.cacheKey, 
-      dataFetchService, 
-      cacheService
+      this.baseUrl,
+      this.cacheKey,
+      dataFetchService,
+      cacheService,
     );
   }
 

@@ -4,7 +4,7 @@ import { Injectable } from '@nestjs/common';
 import axios from 'axios';
 import { Film } from '../../graphql/models/film.model';
 import { DataFetchService } from '../../common/services/data-fetch.service';
-import { CacheService } from 'src/common/services/cache.service';
+import { CacheService } from '../../common/services/cache.service';
 import { GenericSwapiService, ISwapiService } from '../generic-swapi.service';
 
 

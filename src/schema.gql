@@ -19,25 +19,6 @@ type Film {
   title: String
 }
 
-type Person {
-  url: ID!
-  name: String
-  birth_year: String
-  eye_color: String
-  gender: String
-  hair_color: String
-  height: String
-  mass: String
-  skin_color: String
-  homeworld: String
-  films: [String!]
-  species: [String!]
-  starships: [String!]
-  vehicles: [String!]
-  created: String
-  edited: String
-}
-
 type Species {
   url: ID!
   name: String
@@ -113,19 +94,67 @@ type Planet {
   edited: String
 }
 
+type Person {
+  url: ID!
+  name: String
+  birth_year: String
+  eye_color: String
+  gender: String
+  hair_color: String
+  height: String
+  mass: String
+  skin_color: String
+  homeworld: String
+  films: [String!]
+  species: [String!]
+  starships: [String!]
+  vehicles: [String!]
+  created: String
+  edited: String
+}
+
 type Query {
+  """Retrieve a list of all films, with optional pagination."""
   films(page: Int): [Film!]!
-  film(id: Int!): Film
-  people(page: Int): [Person!]!
-  person(id: Int!): Person
+
+  """Retrieve a single film by unique ID."""
+  film(id: Int!): Film!
+
+  """Retrieve a list of all species, with optional pagination."""
   species(page: Int): [Species!]!
-  oneOfSpecies(id: Int!): Species
+
+  """Retrieve a single species by unique ID."""
+  oneOfSpecies(id: Int!): Species!
+
+  """Retrieve a list of all starships, with optional pagination."""
   starships(page: Int): [StarShip!]!
-  starship(id: Int!): StarShip
+
+  """Retrieve a single starship by unique ID."""
+  starship(id: Int!): StarShip!
+
+  """Retrieve a list of all vehicles, with optional pagination."""
   vehicles(page: Int): [Vehicle!]!
-  vehicle(id: Int!): Vehicle
+
+  """Retrieve a single vehicle by unique ID."""
+  vehicle(id: Int!): Vehicle!
+
+  """Retrieve a list of all planets, with optional pagination."""
   planets(page: Int): [Planet!]!
-  planet(id: Int!): Planet
+
+  """Retrieve a single planet by unique ID."""
+  planet(id: Int!): Planet!
+
+  """
+  Retrieve a list of all unique words in film openings, with their counts. Expect to be [[String, Int]]
+  """
   uniqueWordsInFilmOpenings: [[String!]!]!
+
+  """Retrieve a list of the most common character names in film openings."""
   mostCommonCharacterNamesInOpenings: [String!]!
+
+  """Retrieve a list of all people, with optional pagination."""
+  people(page: Int): [Person!]!
+
+  """Retrieve a single person by unique ID."""
+  person(id: Int!): Person!
 }

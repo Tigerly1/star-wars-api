@@ -5,7 +5,7 @@ import { DataFetchService } from '../../common/services/data-fetch.service';
 import { Planet } from '../../graphql/models/planet.model';
 import axios from 'axios';
 import { GenericSwapiService, ISwapiService } from '../generic-swapi.service';
-import { CacheService } from 'src/common/services/cache.service';
+import { CacheService } from '../../common/services/cache.service';
 
 @Injectable()
 export class PlanetService {
