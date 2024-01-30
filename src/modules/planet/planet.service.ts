@@ -1,40 +1,39 @@
 // Path: src/modules/planet/planet.service.ts
 
-import { Injectable } from '@nestjs/common';
-import { DataFetchService } from '../../common/services/data-fetch.service';
-import { Planet } from '../../graphql/models/planet.model';
-import axios from 'axios';
-import { GenericSwapiService, ISwapiService } from '../generic-swapi.service';
-import { CacheService } from '../../common/services/cache.service';
+import { Injectable } from '@nestjs/common'
+import { DataFetchService } from '../../common/services/data-fetch.service'
+import { type Planet } from '../../graphql/models/planet.model'
+import { GenericSwapiService, type ISwapiService } from '../generic-swapi.service'
+import { CacheService } from '../../common/services/cache.service'
 
 @Injectable()
 export class PlanetService {
-  private readonly swapiService: ISwapiService<Planet>;
+  private readonly swapiService: ISwapiService<Planet>
 
-  protected baseUrl = 'https://swapi.dev/api/planets';
-  protected cacheKey = 'planets';
+  protected baseUrl = 'https://swapi.dev/api/planets'
+  protected cacheKey = 'planets'
 
-  constructor(
+  constructor (
     dataFetchService: DataFetchService,
-    cacheService: CacheService,
+    cacheService: CacheService
   ) {
     this.swapiService = new GenericSwapiService<Planet>(
-      this.baseUrl, 
-      this.cacheKey, 
-      dataFetchService, 
+      this.baseUrl,
+      this.cacheKey,
+      dataFetchService,
       cacheService
-    );
+    )
   }
 
-  getAll(): Promise<Planet[]> {
-    return this.swapiService.getAll();
+  async getAll (): Promise<Planet[]> {
+    return await this.swapiService.getAll()
   }
 
-  getPage(page: number): Promise<Planet[]> {
-    return this.swapiService.getPage(page);
+  async getPage (page: number): Promise<Planet[]> {
+    return await this.swapiService.getPage(page)
   }
 
-  findOne(id: number): Promise<Planet> {
-    return this.swapiService.findOne(id);
+  async findOne (id: number): Promise<Planet> {
+    return await this.swapiService.findOne(id)
   }
 }

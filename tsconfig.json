@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
+    "module": "ESNext",
     "declaration": true,
     "removeComments": true,
     "emitDecoratorMetadata": true,
@@ -12,13 +12,24 @@
     "baseUrl": "./",
     "incremental": true,
     "skipLibCheck": true,
-    "strictNullChecks": false,
     "noImplicitAny": false,
+    "moduleResolution":"node",
     "strictBindCallApply": false,
+    "strictNullChecks": true,
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
     "paths": {
       "src/*": ["src/*"]
     },
-  }
+  },
+  "include": [
+    "src/**/*", // Adjust this path to include all your TypeScript files
+    ".eslintrc.js" // Include your ESLint config file if it's written in JS
+    // You can add other directories or specific files you want to include
+  ],
+  "exclude": [
+    "node_modules", // Typically exclude node_modules
+    "dist" // Exclude the directory used for compiled output
+    // Add any other directories you want to exclude from TypeScript compilation
+  ]
 }

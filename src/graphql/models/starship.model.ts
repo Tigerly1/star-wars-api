@@ -1,60 +1,60 @@
 // src/graphql/models/starships.model.ts
 
-import { Field, ObjectType, ID } from '@nestjs/graphql';
+import { Field, ObjectType, ID } from '@nestjs/graphql'
 
 @ObjectType()
 export class StarShip {
   @Field(() => ID)
-  url: string;
+    url: string
 
   @Field({ nullable: true })
-  name: string;
+    name: string
 
   @Field({ nullable: true })
-  model: string;
+    model: string
 
   @Field({ nullable: true })
-  starship_class: string;
+    starship_class: string
 
   @Field({ nullable: true })
-  manufacturer: string;
+    manufacturer: string
 
   @Field({ nullable: true })
-  cost_in_credits: string;
+    cost_in_credits: string
 
   @Field({ nullable: true })
-  length: string;
+    length: string
 
   @Field({ nullable: true })
-  crew: string;
+    crew: string
 
   @Field({ nullable: true })
-  passengers: string;
+    passengers: string
 
   @Field({ nullable: true })
-  max_atmosphering_speed: string;
+    max_atmosphering_speed: string
 
   @Field({ nullable: true })
-  hyperdrive_rating: string;
+    hyperdrive_rating: string
 
   @Field({ nullable: true })
-  MGLT: string;
+    MGLT: string
 
   @Field({ nullable: true })
-  cargo_capacity: string;
+    cargo_capacity: string
 
   @Field({ nullable: true })
-  consumables: string;
+    consumables: string
 
-  @Field(() => [String],{ nullable: true })
-  films: string[];
+  @Field(() => [String], { nullable: true })
+    films: string[]
 
-  @Field(() => [String],{ nullable: true })
-  pilots: string[];
-
-  @Field({ nullable: true })
-  created: string;
+  @Field(() => [String], { nullable: true })
+    pilots: string[]
 
   @Field({ nullable: true })
-  edited: string;
+    created: string
+
+  @Field({ nullable: true })
+    edited: string
 }

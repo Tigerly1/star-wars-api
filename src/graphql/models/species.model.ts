@@ -1,52 +1,51 @@
 // src/graphql/models/species.model.ts
 
-import { Optional } from '@nestjs/common';
-import { Field, ObjectType, ID } from '@nestjs/graphql';
+import { Field, ObjectType, ID } from '@nestjs/graphql'
 
 @ObjectType()
 export class Species {
   @Field(() => ID)
-  url: string;
+    url: string
 
   @Field({ nullable: true })
-  name: string;
+    name: string
 
   @Field({ nullable: true })
-  classification: string;
+    classification: string
 
   @Field({ nullable: true })
-  designation: string;
+    designation: string
 
   @Field({ nullable: true })
-  average_height: string;
+    average_height: string
 
   @Field({ nullable: true })
-  average_lifespan: string;
+    average_lifespan: string
 
   @Field({ nullable: true })
-  eye_colors: string;
+    eye_colors: string
 
   @Field({ nullable: true })
-  hair_colors: string;
+    hair_colors: string
 
   @Field({ nullable: true })
-  skin_colors: string;
+    skin_colors: string
 
   @Field({ nullable: true })
-  language: string;
+    language: string
 
   @Field({ nullable: true })
-  homeworld: string;
+    homeworld: string
 
-  @Field(() => [String],{ nullable: true })
-  people: string[];
+  @Field(() => [String], { nullable: true })
+    people: string[]
 
-  @Field(() => [String],{ nullable: true })
-  films: string[];
-
-  @Field({ nullable: true })
-  created: string;
+  @Field(() => [String], { nullable: true })
+    films: string[]
 
   @Field({ nullable: true })
-  edited: string;
+    created: string
+
+  @Field({ nullable: true })
+    edited: string
 }

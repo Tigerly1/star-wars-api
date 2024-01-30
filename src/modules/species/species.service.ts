@@ -1,38 +1,37 @@
-import { Injectable } from '@nestjs/common';
-import axios from 'axios';
-import { Species } from '../../graphql/models/species.model';
-import { DataFetchService } from '../../common/services/data-fetch.service';
-import { GenericSwapiService, ISwapiService } from '../generic-swapi.service';
-import { CacheService } from '../../common/services/cache.service';
+import { Injectable } from '@nestjs/common'
+import { type Species } from '../../graphql/models/species.model'
+import { DataFetchService } from '../../common/services/data-fetch.service'
+import { GenericSwapiService, type ISwapiService } from '../generic-swapi.service'
+import { CacheService } from '../../common/services/cache.service'
 
 @Injectable()
 export class SpeciesService {
-  private readonly swapiService: ISwapiService<Species>;
+  private readonly swapiService: ISwapiService<Species>
 
-  protected baseUrl = 'https://swapi.dev/api/species';
-  protected cacheKey = 'species';
+  protected baseUrl = 'https://swapi.dev/api/species'
+  protected cacheKey = 'species'
 
-  constructor(
+  constructor (
     dataFetchService: DataFetchService,
-    cacheService: CacheService,
+    cacheService: CacheService
   ) {
     this.swapiService = new GenericSwapiService<Species>(
-      this.baseUrl, 
-      this.cacheKey, 
-      dataFetchService, 
+      this.baseUrl,
+      this.cacheKey,
+      dataFetchService,
       cacheService
-    );
+    )
   }
 
-  getAll(): Promise<Species[]> {
-    return this.swapiService.getAll();
+  async getAll (): Promise<Species[]> {
+    return await this.swapiService.getAll()
   }
 
-  getPage(page: number): Promise<Species[]> {
-    return this.swapiService.getPage(page);
+  async getPage (page: number): Promise<Species[]> {
+    return await this.swapiService.getPage(page)
   }
 
-  findOne(id: number): Promise<Species> {
-    return this.swapiService.findOne(id);
+  async findOne (id: number): Promise<Species> {
+    return await this.swapiService.findOne(id)
   }
 }

@@ -1,46 +1,46 @@
-import { Field, ObjectType, ID } from '@nestjs/graphql';
+import { Field, ObjectType, ID } from '@nestjs/graphql'
 
 @ObjectType()
 export class Planet {
   @Field(() => ID)
-  url: string;
+    url: string
 
   @Field({ nullable: true })
-  name: string;
+    name: string
 
   @Field({ nullable: true })
-  diameter: string;
+    diameter: string
 
   @Field({ nullable: true })
-  rotation_period: string;
+    rotation_period: string
 
   @Field({ nullable: true })
-  orbital_period: string;
+    orbital_period: string
 
   @Field({ nullable: true })
-  gravity: string;
+    gravity: string
 
   @Field({ nullable: true })
-  population: string;
+    population: string
 
   @Field({ nullable: true })
-  climate: string;
+    climate: string
 
   @Field({ nullable: true })
-  terrain: string;
+    terrain: string
 
   @Field({ nullable: true })
-  surface_water: string;
+    surface_water: string
 
-  @Field(() => [String],{ nullable: true })
-  residents: string[];
+  @Field(() => [String], { nullable: true })
+    residents: string[]
 
-  @Field(() => [String],{ nullable: true })
-  films: string[];
-
-  @Field({ nullable: true })
-  created: string;
+  @Field(() => [String], { nullable: true })
+    films: string[]
 
   @Field({ nullable: true })
-  edited: string;
+    created: string
+
+  @Field({ nullable: true })
+    edited: string
 }

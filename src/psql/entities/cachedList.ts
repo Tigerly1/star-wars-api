@@ -1,19 +1,19 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm'
 
 @Entity()
 export class CachedList {
   @PrimaryGeneratedColumn()
-  id: number;
+    id: number
 
   @Column()
-  resourceType: string; // e.g., 'films', 'people'
+    resourceType: string // e.g., 'films', 'people'
 
   @Column('jsonb')
-  data: any[]; // Array of data items
+    data: any[] // Array of data items
 
   @Column()
-  createdAt: Date;
+    createdAt: Date
 
   @Column({ nullable: true })
-  page: number; // Optional, for pagination
+    page: number // Optional, for pagination
 }
