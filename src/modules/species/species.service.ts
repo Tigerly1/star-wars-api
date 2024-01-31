@@ -13,7 +13,7 @@ export class SpeciesService {
 
   constructor (
     dataFetchService: DataFetchService,
-    cacheService: CacheService
+    cacheService: CacheService<Species>
   ) {
     this.swapiService = new GenericSwapiService<Species>(
       this.baseUrl,

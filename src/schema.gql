@@ -94,6 +94,11 @@ type Planet {
   edited: String
 }
 
+type WordCount {
+  word: String!
+  count: Int!
+}
+
 type Person {
   url: ID!
   name: String
@@ -145,9 +150,9 @@ type Query {
   planet(id: Int!): Planet!
 
   """
-  Retrieve a list of all unique words in film openings, with their counts. Expect to be [[String, Int]]
+  Retrieve a list of all unique words in film openings, with their counts.
   """
-  uniqueWordsInFilmOpenings: [[String!]!]!
+  uniqueWordsInFilmOpenings: [WordCount!]!
 
   """Retrieve a list of the most common character names in film openings."""
   mostCommonCharacterNamesInOpenings: [String!]!

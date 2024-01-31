@@ -15,7 +15,7 @@ export class PlanetService {
 
   constructor (
     dataFetchService: DataFetchService,
-    cacheService: CacheService
+    cacheService: CacheService<Planet>
   ) {
     this.swapiService = new GenericSwapiService<Planet>(
       this.baseUrl,

@@ -13,7 +13,7 @@ export class StarShipService {
 
   constructor (
     dataFetchService: DataFetchService,
-    cacheService: CacheService
+    cacheService: CacheService<StarShip>
   ) {
     this.swapiService = new GenericSwapiService<StarShip>(
       this.baseUrl,

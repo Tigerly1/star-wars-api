@@ -1,7 +1,7 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm'
 
 @Entity()
-export class CachedItem {
+export class CachedItem<T> {
   @PrimaryGeneratedColumn()
     id: number
 
@@ -12,7 +12,7 @@ export class CachedItem {
     resourceId: string // e.g., '1', '2'
 
   @Column('jsonb')
-    data: any // The actual data item
+    data: T // The actual data item
 
   @Column()
     createdAt: Date

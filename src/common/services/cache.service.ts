@@ -4,16 +4,20 @@ import { CachedItem } from '../../psql/entities/cachedItem'
 import { CachedList } from '../../psql/entities/cachedList'
 import { IsNull, Repository } from 'typeorm'
 
+function hasKey<T extends object, K extends PropertyKey> (obj: T, key: K): obj is T & Record<K, string> {
+  return key in obj
+}
+
 @Injectable()
-export class CacheService {
+export class CacheService<T> {
   constructor (
     @InjectRepository(CachedItem)
-    private readonly cachedItemRepository: Repository<CachedItem>,
+    private readonly cachedItemRepository: Repository<CachedItem<T>>,
     @InjectRepository(CachedList)
-    private readonly cachedListRepository: Repository<CachedList>
+    private readonly cachedListRepository: Repository<CachedList<T>>
   ) {}
 
-  async getCachedItem (resourceType: string, resourceId: string): Promise<any> {
+  async getCachedItem (resourceType: string, resourceId: string): Promise<T | null> {
     const cachedItem = await this.cachedItemRepository.findOne({
       where: { resourceType, resourceId }
     })
@@ -23,7 +27,7 @@ export class CacheService {
     return null
   }
 
-  async saveCachedItem (resourceType: string, resourceId: string, data: any): Promise<void> {
+  async saveCachedItem (resourceType: string, resourceId: string, data: T): Promise<void> {
     let cachedItem = await this.cachedItemRepository.findOne({
       where: { resourceType, resourceId }
     })
@@ -45,7 +49,7 @@ export class CacheService {
     await this.cachedItemRepository.save(cachedItem)
   }
 
-  async getCachedList (resourceType: string, page?: number): Promise<any> {
+  async getCachedList (resourceType: string, page?: number): Promise<T[] | null> {
     const queryCondition = page !== undefined && page !== null
       ? { resourceType, page }
       : { resourceType, page: IsNull() } // page: IsNull() means page is null in the database
@@ -58,7 +62,7 @@ export class CacheService {
     return null
   }
 
-  async saveCachedList (resourceType: string, data: any[], page?: number): Promise<void> {
+  async saveCachedList (resourceType: string, data: T[], page?: number): Promise<void> {
     const queryCondition = page !== undefined && page !== null
       ? { resourceType, page }
       : { resourceType, page: IsNull() } // page: IsNull() means page is null in the database
@@ -82,10 +86,14 @@ export class CacheService {
     await this.cachedListRepository.save(cachedList)
   }
 
-  async saveIndividualItems (resourceType: string, items: any[]): Promise<void> {
+  async saveIndividualItems (resourceType: string, items: T[]): Promise<void> {
     for (const item of items) {
-      const url = new URL(item.url as string)
-      await this.saveCachedItem(resourceType, this.extractIdFromUrl(url), item)
+      if (typeof item === 'object' && item !== null) {
+        if (hasKey(item, 'url')) {
+          const url = new URL(item.url)
+          await this.saveCachedItem(resourceType, this.extractIdFromUrl(url), item)
+        }
+      }
     }
   }
 

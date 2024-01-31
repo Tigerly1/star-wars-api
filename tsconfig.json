@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "module": "ESNext",
+    "module": "CommonJS",
     "declaration": true,
     "removeComments": true,
     "emitDecoratorMetadata": true,
@@ -24,7 +24,7 @@
   },
   "include": [
     "src/**/*", // Adjust this path to include all your TypeScript files
-    ".eslintrc.js" // Include your ESLint config file if it's written in JS
+    ".eslintrc.js", // Include your ESLint config file if it's written in JS
     // You can add other directories or specific files you want to include
   ],
   "exclude": [
@@ -33,3 +33,5 @@
     // Add any other directories you want to exclude from TypeScript compilation
   ]
 }
+
+

@@ -7,8 +7,8 @@ WORKDIR /usr/src/app
 # Copy package.json and package-lock.json (or yarn.lock) 
 COPY package*.json ./
 
-# Install dependencies
-RUN npm install
+# Install dependencies ## clean install
+RUN npm ci
 
 # Bundle app source
 COPY . .

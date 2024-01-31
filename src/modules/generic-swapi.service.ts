@@ -15,12 +15,12 @@ export class GenericSwapiService<T> implements ISwapiService<T> {
     @Inject('BASE_URL_TOKEN') private readonly baseUrl: string,
     @Inject('CACHE_KEY_TOKEN') private readonly cacheKey: string,
     private readonly dataFetchService: DataFetchService,
-    private readonly cacheService: CacheService
+    private readonly cacheService: CacheService<T>
   ) {}
 
-  async getAll (): Promise<T[]> {
-    let items = await this.cacheService.getCachedList(this.cacheKey)
-    if (!items) {
+  getAll = async (): Promise<T[]> => {
+    let items: T[] | null = await this.cacheService.getCachedList(this.cacheKey)
+    if (items === null) {
       items = await this.dataFetchService.fetchAllData<T>(`${this.baseUrl}`)
       await this.cacheService.saveCachedList(this.cacheKey, items)
       await this.cacheService.saveIndividualItems(this.cacheKey, items)
@@ -29,12 +29,15 @@ export class GenericSwapiService<T> implements ISwapiService<T> {
     return items
   }
 
-  async getPage (page: number): Promise<T[]> {
-    let items = await this.cacheService.getCachedList(this.cacheKey, page)
+  getPage = async (page: number): Promise<T[]> => {
+    let items: T[] | null = await this.cacheService.getCachedList(this.cacheKey, page)
 
-    if (!items) {
+    if (items === null) {
       const response = await axios.get(`${this.baseUrl}/?page=${page}`)
       items = response.data.results
+      if (items === null) {
+        throw new Error('No items found for this page')
+      }
       await this.cacheService.saveCachedList(this.cacheKey, items, page)
       await this.cacheService.saveIndividualItems(this.cacheKey, items)
     }
@@ -42,15 +45,17 @@ export class GenericSwapiService<T> implements ISwapiService<T> {
     return items
   }
 
-  async findOne (id: number): Promise<T> {
-    let item = await this.cacheService.getCachedItem(this.cacheKey, id.toString())
+  findOne = async (id: number): Promise<T> => {
+    let item: T | null = await this.cacheService.getCachedItem(this.cacheKey, id.toString())
 
-    if (!item) {
+    if (item === null) {
       const response = await axios.get(`${this.baseUrl}/${id}/`)
       item = response.data
+      if (item === null) {
+        throw new Error('No item found for this id')
+      }
       await this.cacheService.saveCachedItem(this.cacheKey, id.toString(), item)
     }
-
     return item
   }
 }

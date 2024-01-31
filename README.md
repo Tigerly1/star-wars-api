@@ -4,6 +4,20 @@
 
 The Star Wars API provides comprehensive information about the Star Wars universe, including films, characters, species, starships, and planets. This GraphQL API allows clients to query for detailed data about each entity in the Star Wars universe, offering flexibility and customization in data retrieval
 
+# example
+
+### example mutations
+
+![Alt text](readme-ss/someQueries.png?raw=true "exampleQueries")
+
+### example response time with and without cache
+
+### without cache
+![Alt text](readme-ss/responseWithoutCache.png?raw=true "responseTimeWitchCache")
+
+### with cache
+![Alt text](readme-ss/responseTimeWitchCache.png?raw=true "responseTimeWithCache")
+
 # Installation
 
 ## Create .env file and set variables
@@ -39,5 +53,7 @@ To run tests, run the following command
 ```bash
   npm test
 ```
+
+
 
 

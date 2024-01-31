@@ -15,7 +15,7 @@ export class FilmService {
 
   constructor (
     dataFetchService: DataFetchService,
-    cacheService: CacheService
+    cacheService: CacheService<Film>
   ) {
     this.swapiService = new GenericSwapiService<Film>(
       this.baseUrl,
